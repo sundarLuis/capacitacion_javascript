@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "testName1",
+        "lastName": "lastName1",
+        "status": false
+    },
+    {
+        "id": 2,
+        "name": "testName2",
+        "lastName": "lastName2",
+        "status": true
+    }
+]
