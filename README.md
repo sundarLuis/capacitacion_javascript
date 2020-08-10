@@ -1,2 +1,2 @@
 # capacitacion_javascript
-### Nota: tambien existe readme en los ejemplo
+### Nota: tambien existe readme en los ejemplos
