@@ -2,6 +2,15 @@
  * tipos de array
  */
 let array = [1,2.3,true,"string"]
+ /**
+ * objeto
+ */
+ let objectTest = {
+            id:2,
+            name:"testName2",
+            lastName:"lastName2",
+            status:true,
+        }
 let arrayObjects = [
         {
             id:1,
@@ -16,6 +25,7 @@ let arrayObjects = [
             status:true,
         }
     ]
+
 /**
  * exportamos los array
  */
