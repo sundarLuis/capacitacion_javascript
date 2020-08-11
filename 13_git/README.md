@@ -56,4 +56,4 @@ Use `git clone` para clonar repositorios, ejemplo con el repositorio
 ```
  $ git clone https://github.com/sundarLuis/capacitacion_javascript.git nameForderAlCrearOpcional
 ```
-![alt text](https://github.com/sundarLuis/capacitacion_javascript/blob/master/12_git/img/clonando.PNG?raw=true)
+![alt text](https://github.com/sundarLuis/capacitacion_javascript/blob/master/13_git/img/clonando.PNG?raw=true)
