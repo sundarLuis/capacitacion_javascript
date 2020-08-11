@@ -14,12 +14,19 @@ Use `git status` para verificar tus cambios
  $ git status
 ```
 Use `git add` para añadir los cambios al repositorio local
+> Use `git add .` para añadir todos los cambios pendientes
 ```
  $ git add
+ $ git add .
+ $ git add nombreDirectorio
 ```
 Use `git commit` para guardar los cambios añadidos
+> Use `git commit -m ` para añadir un comentario en linea,
+> normalmente sin `-m` se abre un editor de terminal `nano` si no sabe usarlo
+> ponga siempre `-m` para que no tenga problemas.
 ```
  $ git commit
+ $ git commit -m "comentario de prueba"
 ```
 ### Repositorios Externos 
 - GitHub
