@@ -51,7 +51,11 @@ function programacionFuncional() {
     console.log("newData",newData)
     let filterHello = words.filter(word => word == "hello")
     console.log("filterHello",filterHello)
+     //tambien puedes crear tus propias funciones siempre busca un nombre basado como se hace
+     //por ejemplo hare una funcion que busque usuarios seria filterUsers, si fuera fitrar por id
+     //filterUsersById
 }
 programacionImperativa() 
 programacionFuncional()
+
 //** reduce(recomiendo buscar info cuando terminen de entender map y filter y hay mas todavia) */
