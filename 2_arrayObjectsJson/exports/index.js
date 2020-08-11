@@ -11,6 +11,7 @@ let array = [1,2.3,true,"string"]
             lastName:"lastName2",
             status:true,
         }
+
 let arrayObjects = [
         {
             id:1,
@@ -31,6 +32,7 @@ let arrayObjects = [
  */
 module.exports = {
     array:array, 
+    objectTest,
     arrayObjects,// es la mismo que  arrayObjects : arrayObjects
 }
 
