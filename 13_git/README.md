@@ -51,6 +51,21 @@ Use `git commit` para guardar los cambios añadidos
 
 ![alt text](https://docs.github.com/assets/images/help/repository/create-repository-button.png)
 
+Use `git remote add` para añadir el repositorio externo GitHub
+```
+ $ git remote add https://github.com/sundarLuis/capacitacion_javascript.git
+
+```
+Use `git push` para guardar los cambios locales en el repositorio externo ejemplo GitHub
+```
+    $ git push
+    $ git push origin master
+```
+Use `git pull` para actualizar los cambios locales en el repositorio externo ejemplo GitHub
+```
+    $ git pull
+    $ git pull origin master
+```
 ## Clonando un repositorio
 Use `git clone` para clonar repositorios, ejemplo con el repositorio
 ```
