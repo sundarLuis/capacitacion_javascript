@@ -32,3 +32,7 @@ console.log("arrowFunction", arrowFunction())
 /* funcion de fecha/arrow function con parametro */
 const arrowFunctionWithParam = (param) => param ? true : false
 console.log("arrowFunctionWithParam", arrowFunctionWithParam("true"))
+/**
+ * nota los "arrow functions" no simpre es recomendable especialmente cuando se hereda en le DOM pasa mucho estos casos
+ * para heredar se usa la palabra reservada "this"
+ */

@@ -1,3 +1,6 @@
+/**
+ * diferencias entre var let const en mas profundidad como recomendación seria usar let y const
+ */
 //setTimeout => metodo de javascript para poner un tiempo de espera para ejecutar X codigo
 function testVar(){
     console.log("-- testVar --")
