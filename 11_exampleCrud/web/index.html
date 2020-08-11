@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap cdn css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/f9404d929a.js"></script>
+</head>
+
+<body>
+    <!-- app vue start-->
+    <div id="app">
+        <!-- <span>{{message}}</span> -->
+        <alert-connention-error v-if="errorConnectApi === true"></alert-connention-error>
+        <!-- <div  class="row mt-3 mr-3 d-flex justify-content-end">
+            <div class="col-5">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Error en la conexion, Espere unos momentos
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            </div>
+        </div> -->
+
+        <div class="container">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Gestión de Tareas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3 d-flex justify-content-end">
+                        <button type="button" class="btn btn-outline-primary" @click="modalAddEdit()">
+                            <i class="fa fa-plus" aria-hidden="true" @click="modalAddEdit()"></i>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <table class="table table-hover table-bordered table-sm text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Aciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="t in tasks" :key="t.id">
+                                    <th scope="row">{{shortenCod(t.id)}}</th>
+                                    <td>{{t.name}}</td>
+                                    <td>{{t.description}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-warning" @click="modalAddEdit(t)">
+                                            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger" @click="modalDelete(t)">
+                                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal modal-add-edit-->
+        <div class="modal fade" id="modal-add-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            data-backdrop="static" data-keyboard="false" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 v-if="modeEdit" class="modal-title">Editar Tarea</h5>
+                        <h5 v-else class="modal-title">Agregar Tarea</h5>
+                        <button type="button" class="close" @click="clearForm" aria-label="Close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" v-model="task.name">
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea class="form-control" rows="2" v-model="task.description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @click="clearForm" data-dismiss="modal"
+                            aria-label="Close">Cerrar</button>
+                        <button v-if="modeEdit" type="button" class="btn btn-primary"
+                            @click="createAndUpdateTask(true)">Guardar</button>
+                        <button v-else type="button" class="btn btn-primary"
+                            @click="createAndUpdateTask(false)">Guardar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal modal-delete-->
+        <div class="modal fade bd-example-modal-lg" id="modal-delete" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Alert</h5>
+                        <button type="button" class="close" @click="" aria-label="Close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="container">
+                        <p>¿Desea borrar esta tarea? </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"
+                            aria-label="Close">Cerrar</button>
+                        <button type="button" class="btn btn-primary" @click="deleteTask">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal modal-error-->
+        <div class="modal fade bd-example-modal-lg" id="modal-error" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Alert</h5>
+                        <button type="button" class="close" @click="" aria-label="Close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="container">
+                        <p>{{errorMessage}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" @click="" data-dismiss="modal"
+                            aria-label="Close">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- app vue end-->
+
+
+    <!-- imports -->
+    <!-- bootstrap cdn js-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <!-- cdn axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <!-- cdn lodash -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <!-- helper -->
+    <script src='./helper/consumerApi.js'></script>
+    <script src='./helper/modalFunctions.js'></script>
+    <!-- cdn vue -->
+    <script src='https://unpkg.com/vue'></script>
+    <!--components -->
+    <script src='./vue/components/AlertConnentionError.js'></script>
+
+    <!--index-->
+    <script src='./vue/index.js'></script>
+</body>
+
+</html>
